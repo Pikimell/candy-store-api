@@ -1,5 +1,5 @@
-org: author
-service: AWS-BACKEND
+org: pikimell
+service: candy-store
 
 frameworkVersion: '3'
 
@@ -11,40 +11,16 @@ plugins:
 provider:
   name: aws
   runtime: nodejs18.x
-  region: us-east-2
+  region: us-east-1
   stage: dev
-  profile: serverlessTemplate
-  timeout: 20
+  profile: serverlessUser
+  timeout: 29
 
 functions:
-  templateGet:
-    handler: src/handlers/templates/getTemplateHandler.getTemplateHandler
+  getDistance:
+    handler: src/handlers/googleMaps/getDistanceHandler.getDistanceHandler
     events:
       - http:
-          path: template
-          method: get
-          cors: true
-
-  templatePost:
-    handler: src/handlers/templates/createTemplateHandler.createTemplateHandler
-    events:
-      - http:
-          path: templates
+          path: distance
           method: post
-          cors: true
-
-  templatePut:
-    handler: src/handlers/templates/putTemplateHandler.putTemplateHandler
-    events:
-      - http:
-          path: templates/{templateId}
-          method: put
-          cors: true
-
-  templateDelete:
-    handler: src/handlers/templates/deleteTemplateHandler.deleteTemplateHandler
-    events:
-      - http:
-          path: templates/{templateId}
-          method: delete
           cors: true
